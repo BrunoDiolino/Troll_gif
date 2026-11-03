@@ -3,18 +3,11 @@
 #include <windows.h>
 
 void Exvid() {
-  char cwd[MAX_PATH];
-  GetCurrentDirectoryA(MAX_PATH, cwd);
-  printf("cwd: %s\n", cwd);
-  printf("gif existe: %d\n",
-         GetFileAttributesA("Takemi_saborosa.gif") != INVALID_FILE_ATTRIBUTES);
-
-  int r = system("\"\"C:\\Program Files\\IrfanView\\i_view64.exe\" "
-                 "\".\\Takemi_saborosa.gif\" /fs\"");
-
-  printf("sistem %d\n", r);
+  HINSTANCE r = ShellExecuteA(NULL, "open", "Takemi_saborosa.gif", NULL, NULL,
+                              SW_SHOWNORMAL);
+  if ((INT_PTR)r <= 32)
+    printf("falhou ao abrir o gif (codigo %d)\n", (int)(INT_PTR)r);
 }
-
 int main(void) {
   printf("pega essa zueira de leve kkkkkkkkk\n");
   Exvid();
